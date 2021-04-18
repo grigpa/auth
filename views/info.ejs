@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% include menu %>
+    <h1><%= title %></h1>
+    <% if (locals.user) { %>
+      <p>Id: <%= user.id %></p>
+      <p>Логин: <%= user.name %></p>
+
+      <form action='/update' method='post'>
+        <input type="hidden" name="user[id]" value="<%= user.id %>">
+        <input type="hidden" name="user[name]" value="<%= user.name %>">
+        <p>
+          <label for="user[testField]">Test field</label>
+          <input type='text' name='user[testField]' placeholder='Test field' value="<%= user.testField %>"/>
+        </p>
+        <p>
+          <input type='submit' value='Обновить' />
+        </p>
+      </form>
+    <% } else { %>
+      <p>Необходимо авторизоваться</p>
+    <% } %>
+
+  </body>
+</html>
