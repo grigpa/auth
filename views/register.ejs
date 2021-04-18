@@ -11,16 +11,28 @@
     <% include messages %>
     <form action='/register' method='post'>
       <p>
-        <input type='text' name='user[name]' placeholder='Логин' />
+        <input type='text' name='user[login]' placeholder='Логин' />
+      </p>
+      <p>
+        <input type='text' name='user[surname]' placeholder='Фамилия' />
+      </p>
+      <p>
+        <input type='text' name='user[name]' placeholder='Имя' />
+      </p>
+      <p>
+        <input type='text' name='user[patronymic]' placeholder='Отчество' />
+      </p>
+      <p>
+        <b>Паспортные данные</b>
+        <br>
+        <input type='number' name='user[series]' placeholder='Серия' />
+        <input type='number' name='user[number]' placeholder='Номер' />
       </p>
       <p>
         <input type='password' name='user[pass]' placeholder='Пароль' />
       </p>
       <p>
-        <input type='text' name='user[testField]' placeholder='testField' />
-      </p>
-      <p>
-        <input type='submit' value='Регистрация' />
+        <input type='submit' value='Зарегистрироваться' />
       </p>
     </form>
   </body>
