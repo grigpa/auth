@@ -5,9 +5,9 @@ exports.form = (req, res) => {
 };
 
 exports.submit = (req, res, next) => {
-  var data = req.body.user;
-  console.log('Пользователь:', req.body.user);
-  User.getByName(data.name, (err, user) => {
+  var data = req.body;
+
+  User.getByLogin(data.login, (err, user) => {
     if (err) return next(err);
 
     if (user.id) {
@@ -15,10 +15,16 @@ exports.submit = (req, res, next) => {
       res.redirect('back');
     } else {
       user = new User({
+        login: data.login,
+        password: data.password,
+        surname: data.surname,
         name: data.name,
-        pass: data.pass,
-        testField: data.testField
+        patronymic: data.patronymic,
+        series: data.series,
+        number: data.number
       });
+      console.log('User', user);
+      return;
       user.save((err) => {
         if (err) return next(err);
         req.session.uid = user.id;

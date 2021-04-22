@@ -2,39 +2,79 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <% include head %>
   </head>
   <body>
     <% include menu %>
-    <h1><%= title %></h1>
-    <p>Заполните поля для регистрации</p>
-    <% include messages %>
-    <form action='/register' method='post'>
-      <p>
-        <input type='text' name='user[login]' placeholder='Логин' />
-      </p>
-      <p>
-        <input type='text' name='user[surname]' placeholder='Фамилия' />
-      </p>
-      <p>
-        <input type='text' name='user[name]' placeholder='Имя' />
-      </p>
-      <p>
-        <input type='text' name='user[patronymic]' placeholder='Отчество' />
-      </p>
-      <p>
-        <b>Паспортные данные</b>
-        <br>
-        <input type='number' name='user[series]' placeholder='Серия' />
-        <input type='number' name='user[number]' placeholder='Номер' />
-      </p>
-      <p>
-        <input type='password' name='user[pass]' placeholder='Пароль' />
-      </p>
-      <p>
-        <input type='submit' value='Зарегистрироваться' />
-      </p>
-    </form>
+
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 form-container">
+          <div class="col-lg-8 col-md-12 col-sm-9 col-xs-12 form-box text-center">
+
+            <div class="heading mb-3">
+              <h4>Регистрация</h4>
+            </div>
+
+            <!---------------------------FORMS SECTION--------------------- -->
+            <form id="registerForm">
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Логин" name="login" required>
+              </div>
+
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="password" placeholder="Пароль" name="password" required>
+              </div>
+
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Фамилия" name="surname" required>
+              </div>
+
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Имя" name="name" required>
+              </div>
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Отчество" name="patronymic" required>
+              </div>
+              <div class="text-white">Паспортные данные</div>
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Серия" name="series" required>
+              </div>
+              <div class="form-input">
+                <span><i class="fa fa-user"></i></span>
+                <input type="text" placeholder="Номер" name="number" required>
+              </div>
+
+
+
+
+              <div class="text-left mb-3">
+                <button type="button" class="btn" id="submitBtnRegister">Регистрация</button>
+              </div>
+
+
+              <div class="text-white">Уже регистрировались?
+                <a href="login1.html" class="login-link">Залогиньтесь</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--------------------------//////////////--------------------- -->
+        <div class="col-lg-6 col-md-6 d-none d-md-block image-container">
+          <h1 class="text-center text-light mt-5" data-aos="fade-up">Добро пожаловать!</h1>
+          <p class="text-center text-light mt-5" data-aos="fade-up">Этот проект демонстрирует регистрацию, аутентификацию пользователя. Работу с личными данными. Хранение осуществляется в MySQL</p>
+        </div>
+        <!--------------------------//////////////--------------------- -->
+
+      </div>
+    </div>
   </body>
 </html>
 
