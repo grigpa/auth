@@ -18,6 +18,9 @@ conn.connect((err) => {
 
 
 class User {
+    salt = '';
+    password = '';
+
     constructor(obj) {
         for (let key in obj) {
             this[key] = obj[key];
@@ -28,14 +31,33 @@ class User {
         if (this.id) {
             this.update(cb);
         } else {
-            // db.incr('user:ids', (err, id) => {
-            //   if (err) return cb(err);
-            //   this.id = id;
-            //   this.hashPassword((err) => {
-            //     if (err) return cb(err);
-            //     this.update(cb);
-            //   });
-            // });
+            this.hashPassword((err) => {
+                if (err) return cb(err);
+                conn.query('insert into users(login, password, salt, surname, name, patronymic, series, number) values(?,?,?,?,?,?,?,?)',
+                    [this.login, this.password, this.salt, this.surname, this.name, this.patronymic, this.series, this.number],function(err,results, f){
+
+                            this.id = results.insertId;
+                            cb(err, results.insertId);
+                            // req.login(user_id, function (err) {
+                            //     res.redirect('/');
+                            // });
+                            // res.render('register', {'msg': "New Account Created.", 'success': 1});
+
+                        // if (err) throw  err;
+                        // conn.query('select id from users', function (err, results) {
+                        //     if (err) throw  err;
+                        //     console.log(results[0]);
+                        //
+                        //     //login the user
+                        //     const user_id = results[0];
+                        //     req.login(user_id, function (err) {
+                        //         res.redirect('/');
+                        //     });
+                        //     res.render('register', {'msg': "New Account Created.", 'success': 1});
+                        // });
+                    });
+            });
+
         }
     }
 
@@ -53,9 +75,10 @@ class User {
         bcrypt.genSalt(12, (err, salt) => {
             if (err) return cb(err);
             this.salt = salt;
-            bcrypt.hash(this.pass, salt, (err, hash) => {
+
+            bcrypt.hash(this.password, salt, (err, hash) => {
                 if (err) return cb(err);
-                this.pass = hash;
+                this.password = hash;
                 cb();
             });
         });

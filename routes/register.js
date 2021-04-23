@@ -4,15 +4,14 @@ exports.form = (req, res) => {
   res.render('register', { title: 'Регистрация' });
 };
 
-exports.submit = (req, res, next) => {
+exports.submitForm = (req, res, next) => {
   var data = req.body;
 
   User.getByLogin(data.login, (err, user) => {
     if (err) return next(err);
 
-    if (user.id) {
+    if (user?.id) {
       res.error('Пользователь уже существует!');
-      res.redirect('back');
     } else {
       user = new User({
         login: data.login,
@@ -23,13 +22,13 @@ exports.submit = (req, res, next) => {
         series: data.series,
         number: data.number
       });
-      console.log('User', user);
-      return;
-      user.save((err) => {
+
+      user.save((err, id) => {
         if (err) return next(err);
-        req.session.uid = user.id;
-        res.redirect('/')
+        req.session.uid = id;
+        res.end({success: true})
       });
+
     }
   });
 };

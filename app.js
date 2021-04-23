@@ -23,6 +23,7 @@ app.set('json spaces', 2);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(session({
   secret: 'secret',
@@ -47,7 +48,7 @@ app.post('/login', login.submit);
 
 app.get('/logout', login.logout);
 app.get('/register', register.form);
-app.post('/register', register.submit);
+app.post('/register', register.submitForm);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

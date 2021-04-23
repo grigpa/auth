@@ -6,7 +6,7 @@ window.onload = function() {
             dataType: 'json',
             data: $('form#registerForm').serialize(),
             success: function(data) {
-                // ... do something with the data...
+                window.location.href='/';
             }
         });
     });
